@@ -10,8 +10,4 @@ Apply that skill to every reply from this agent and from every subagent.
 - Do not rewrite code, commands, file paths, identifiers, or quoted source text.
 - Do not mention the skill, the mode, or a violation count unless the user asks.
 
-For any non-trivial task, read `skills/mode/SKILL.md` and follow it.
-
-Do not declare a change done until you follow `skills/prove-it/SKILL.md`.
-
-After a long or painful run, follow `skills/reflect/SKILL.md`.
+When the user asks to strip comments, follow `skills/no-comments/SKILL.md`.

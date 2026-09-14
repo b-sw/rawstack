@@ -27,11 +27,7 @@ if [[ -f "$lint" ]]; then
   python3 "$lint" \
     "$root/AGENTS.md" \
     "$root/CLAUDE.md" \
-    "$root/README.md" \
-    "$root/skills/mode/SKILL.md" \
-    "$root/skills/prove-it/SKILL.md" \
-    "$root/skills/reflect/SKILL.md" \
-    "$root/agents/default.md"
+    "$root/README.md"
 fi
 
 if [[ "$fail" -ne 0 ]]; then
