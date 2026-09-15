@@ -1,5 +1,5 @@
 ---
-name: simplified-technical-english
+name: simple-english
 description: Apply Simplified Technical English to every user-facing output and every agent-to-agent communication.
 ---
 
