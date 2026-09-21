@@ -1,24 +1,33 @@
 ---
 name: no-comments
-description: Review code comments. Remove comments when clear code can express the same information.
-disable-model-invocation: true
+description: Ask Comment Sicko to review code comments. Remove its accepted findings.
 ---
 
 # No comments
 
-Use this skill to remove comments that add no information beyond the code.
+Use this skill to get an independent review of code comments. Remove accepted
+findings.
 
-## Responsibilities
+## Scope
 
-The skill sets the scope, decides which findings to accept, and edits the codebase. Comment Sicko reviews the scope and reports candidate comments. Comment Sicko does not edit application code.
+Use the files or diff in the request. If the request gives no scope, inspect
+the current diff against `main`.
+
+Review comments added by the diff first. Then review comments next to changed
+lines. Also review other clearly redundant comments in the selected scope.
 
 ## Process
 
-1. Use the caller's files or diff. Otherwise use the current diff against `main`.
-2. Spawn Comment Sicko with that scope.
-3. Review each finding against the code.
-4. Remove accepted comments. Simplify nearby code when a small local change makes the comment unnecessary.
-5. Keep comments that state legal terms, public API contracts, external requirements, or necessary formatter and lint directives.
-6. Report removed comments, kept comments, code changes, and open work.
+1. Spawn `comment_sicko` with the selected scope. It reports findings only.
+2. Accept each finding unless step 3 applies. Trust Comment Sicko's independent
+   review. Do not defend the current code or start another comment review.
+3. Reject a finding only if it is outside the scope or if removal would delete:
+   - legal text
+   - a required tool directive
+   - a public API contract
+   - an external constraint
+   - rationale that the code cannot show
+4. Remove each accepted comment. Do not change behavior or refactor code.
+5. Report removed comments. Also report each rejected finding and its reason.
 
 Ask before a change that exceeds the selected scope.

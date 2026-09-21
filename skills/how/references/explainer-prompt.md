@@ -4,7 +4,7 @@ Build the explainer subagent's prompt from this template. Fill in the placeholde
 
 ---
 
-You are writing an architectural explanation for a senior engineer. Multiple explorer agents have traced different slices of the codebase in parallel and gathered findings. Synthesize their findings into one coherent, well-structured explanation.
+Write an architectural explanation for a senior engineer. Explorer agents examined different parts of the codebase. Combine their findings into one clear explanation.
 
 ## Original Question
 
@@ -16,40 +16,40 @@ You are writing an architectural explanation for a senior engineer. Multiple exp
 
 ## Instructions
 
-The explorers each investigated a different angle of the same subsystem. Their findings will overlap in places and may occasionally contradict. Reconcile them. Merge overlapping descriptions, resolve contradictions by checking the code yourself, and combine the separate slices into a unified picture.
+Each explorer examined a different angle of the same subsystem. Findings can overlap or conflict. Combine duplicate findings. Check the code when you must resolve a conflict. Build one accurate picture.
 
-Write an explanation a senior engineer unfamiliar with this area could read and walk away with a solid mental model, understanding the architecture well enough to start working in it confidently.
+Write for a senior engineer who does not know this area. Give them a useful mental model of the architecture. They should understand it well enough to start work with confidence.
 
-You have read-only access to the codebase to check anything, clarify a detail, or fill a gap. Use Read, Grep, and Glob as needed. The explorers did the work, so you shouldn't need to re-explore from scratch.
+You can read the codebase to check a fact, clarify a detail, or fill a gap. Use Read, Grep, and Glob when needed. Do not repeat the full exploration unless the findings require it.
 
 ## Output Format
 
-Use this structure, adapted to what makes sense for the question. Not every section is needed for every question.
+Use the sections that fit the question. Do not include a section when it adds no value.
 
 ### Overview
-1-2 paragraphs. What is this thing, what does it do, why does it exist. Someone should be able to read just this and decide whether to keep reading.
+Write 1 or 2 paragraphs. State what this is, what it does, and why it exists. A reader should know whether the rest is relevant.
 
 ### Key Concepts
-The important types, services, or abstractions needed to follow the rest. Brief definitions, not exhaustive.
+Define the types, services, and abstractions that the reader needs. Keep the definitions brief.
 
 ### How It Works
-The core of the explanation, and the longest section. Walk through the flow: what triggers it, what happens step by step, where data goes, what the decision points are.
+This is the main and longest section. Describe what starts the flow. Then describe each step, the data path, and the decision points.
 
-Use prose, not pseudocode. Reference specific files and functions so the reader knows where to look, but don't dump large code blocks unless a snippet is essential to a point.
+Use prose, not pseudocode. Refer to files and functions so the reader knows where to look. Include a code snippet only when it proves an important point.
 
-When the flow involves multiple components talking to each other, or data transforming through stages, include a diagram. Use mermaid (```mermaid) for structured flows (sequence diagrams, flowcharts, component graphs) or ASCII art for simpler relationships where mermaid would be overkill. Use your judgment. A diagram should clarify, not decorate. If prose covers the flow, skip the diagram.
+Include a diagram when several components interact or data changes through stages. Use Mermaid for sequences, flows, or component graphs. Use ASCII art for simple relationships. Add a diagram only when it makes the flow clearer.
 
 ### Where Things Live
-A brief file/directory map. Just the ones someone would need to start working here.
+Give a short map of the files and directories needed to begin work.
 
 ### Gotchas
-Non-obvious things, surprising behavior, historical context, pitfalls. Skip this section if there's nothing worth calling out.
+State non-obvious behavior, history, and pitfalls. Omit this section when there is nothing useful to add.
 
 ## Communication Style
 
-- Use concrete language, not abstractions-about-abstractions
-- Say "the `UserService` calls `AuthClient.refresh()`" not "the service delegates to the client"
-- When something is complex, explain why it's complex. Don't just describe the complexity
-- When something is simple, don't pad it out
-- If there's a helpful analogy, use it. If there isn't, don't force one
-- If the explorers flagged open questions or gaps, acknowledge them rather than hiding them
+- Use concrete language.
+- Write “the `UserService` calls `AuthClient.refresh()`,” not “the service delegates to the client.”
+- When a part is complex, explain the cause of the complexity.
+- When a part is simple, keep the explanation short.
+- Use an analogy only when it improves understanding.
+- State open questions and gaps from the explorer findings.

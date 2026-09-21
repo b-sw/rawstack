@@ -1,59 +1,58 @@
 ---
 name: how
 description: "Use for \"how does X work\", code walkthroughs before changing something, and placement / ownership / layering questions (\"where should this live\", \"which package owns this\", \"is this the right layer\"). Explains subsystem architecture, runtime flow, onboarding mental models. Use why for motivation."
-disable-model-invocation: true
 ---
 
 # How
 
-Explore the codebase to answer "how does X work?" questions. Produce architectural explanations at the level of a senior engineer onboarding onto a subsystem, enough to build a working mental model, not so much that it reads like annotated source code.
+Use this skill to answer questions about how code works. Give a senior engineer enough information to work in the area. Do not give a line-by-line source-code review.
 
-## Step 1. Assess Complexity
+## Step 1: Assess the Scope
 
-If the scope is ambiguous, state your interpretation and explore. The user can redirect.
+If the question has an unclear scope, state your interpretation. Then examine the code. The user can correct the scope later.
 
-- **Simple** (a single module, a small utility, a narrow question such as "how does function X work"): no explorers. One explainer explores and explains in a single pass. Go to Step 2b.
-- **Complex** (a subsystem spanning multiple files or services, a cross-cutting feature, a full architectural overview): spawn parallel explorers first, then hand off to the explainer. Go to Step 2a.
+- **Simple:** One module, a small utility, or a narrow question such as “How does function X work?” Use one explainer. Continue with Step 2b.
+- **Complex:** A subsystem across multiple files or services, a cross-cutting feature, or a full architecture overview. Use parallel explorers. Continue with Step 2a.
 
-When in doubt, take the simple path.
+If you are unsure, treat the question as simple.
 
-## Step 2a. Explore (complex questions only)
+## Step 2a: Explore a Complex Question
 
-Decompose the question into 2 to 4 exploration angles, each a distinct slice of the subsystem. Spawn all explorers in a single message:
-
-- `subagent_type`: `generalPurpose`
-- `model`: `gpt-5.6-terra`
-- `reasoning_effort`: `medium`
-- `readonly`: `true`
-
-Each explorer gets the prompt in `references/explorer-prompt.md` with its angle filled in. Then go to Step 3.
-
-## Step 2b. Direct Explain (simple questions)
-
-Spawn one Task subagent that explores and explains in one pass:
+Divide the question into 2 to 4 distinct exploration angles. Start all explorers in one message.
 
 - `subagent_type`: `generalPurpose`
 - `model`: `gpt-5.6-terra`
 - `reasoning_effort`: `medium`
 - `readonly`: `true`
 
-Build its prompt from `references/explainer-prompt.md` without the explorer-findings section. Go to Step 4.
+Give each explorer the prompt in `references/explorer-prompt.md`. Fill in its exploration angle. Continue with Step 3.
 
-## Step 3. Synthesize (complex questions only)
+## Step 2b: Explain a Simple Question
 
-Once all explorers have returned, spawn one Task subagent to synthesize their findings into one explanation:
+Start one Task subagent. It must examine the code and write the explanation in one pass.
 
 - `subagent_type`: `generalPurpose`
 - `model`: `gpt-5.6-terra`
 - `reasoning_effort`: `medium`
 - `readonly`: `true`
 
-Build its prompt from `references/explainer-prompt.md` with every explorer's findings filled in.
+Build its prompt from `references/explainer-prompt.md`. Omit the explorer findings section. Continue with Step 4.
 
-## Step 4. Present
+## Step 3: Combine Findings for a Complex Question
 
-Present the explainer's output to the user. Light edits for clarity or context from the conversation are fine. Do not substantially rewrite it.
+After all explorers return, start one Task subagent to combine their findings into one explanation.
+
+- `subagent_type`: `generalPurpose`
+- `model`: `gpt-5.6-terra`
+- `reasoning_effort`: `medium`
+- `readonly`: `true`
+
+Build its prompt from `references/explainer-prompt.md`. Include the findings from every explorer.
+
+## Step 4: Present the Explanation
+
+Give the explainer output to the user. You can make small edits for clarity or conversation context. Do not change its substance.
 
 ## Output Format
 
-The explanation uses the sections defined in `references/explainer-prompt.md`, dropping any that do not apply: Overview, Key Concepts, How It Works, Where Things Live, Gotchas.
+Use the sections in `references/explainer-prompt.md` when they apply: Overview, Key Concepts, How It Works, Where Things Live, and Gotchas.

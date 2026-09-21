@@ -1,0 +1,3 @@
+interface:
+  display_name: "Principle: Good Tests"
+  short_description: "Test behavior for release confidence"
