@@ -25,6 +25,7 @@ Use direct judgment. Do the work. Keep the change small. Verify the result.
 
 - **Foundational Thinking** (**principle-foundational-thinking**). Before writing non-trivial logic. Name the core data shape and the ownership of shared state first.
 - **Good Tests** (**principle-good-tests**). When creating or reviewing tests. Prefer tests that prove user-visible behavior.
+- **Visual Proof** (**principle-visual-proof**). When building or redesigning a feature with a visible surface. Capture screenshots and get a `ui-reviewer` review of them.
 
 ## Autonomy
 
