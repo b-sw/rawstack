@@ -1,6 +1,6 @@
 ---
 name: raw-mode
-description: Use for raw mode, $raw-mode, or /raw-mode. It gives a concise, evidence-led workflow and routes normal subagents to raw-agent.
+description: Use for raw mode or $raw-mode. It gives a concise, evidence-led workflow and routes normal subagents to raw-agent.
 ---
 
 # Raw mode
