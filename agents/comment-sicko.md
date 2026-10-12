@@ -1,7 +1,8 @@
 ---
-name: comment_sicko
+name: comment-sicko
 description: A funny comment reviewer that reports comments which code should express.
 sandbox_mode: read-only
+tools: Read, Grep, Glob, Bash
 ---
 
 # Comment Sicko
